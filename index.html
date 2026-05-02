@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Card</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <div class="header">
+      <img src="EDGEVARSITY logo.png" alt="Company Logo" class="logo">
+      <div class="company-name">EDGEVARSITY NIGERIA</div>
+    </div>
+
+    <!-- Card -->
+    <div class="card">
+      
+      <!-- Left Content -->
+      <div class="content">
+        <h2 class="age">@40</h2>
+        <h1 class="title">HAPPY<br> BIRTHDAY</h1>
+
+        <div class="details">
+          <p class="name">MR. ALLI FOLORUNSHO KOLAWOLE</p>
+          <p class="position">Director</p>
+          <p class="date">06 . 05</p>
+        </div>
+      </div>
+
+      <!-- Right Image -->
+      <div class="image-section">
+        <img src="mr ali pic.png" alt="Celebrant">
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="shoutout">
+    <h1 class="text-out">VIDEO SHOUTOUTS</h1>
+  </div>
+
+  <div class="video-slider">
+
+  <video class="slide active" src="vid1.mp4" muted playsinline></video>
+  <video class="slide" src="vid2.mp4" muted playsinline></video>
+  <video class="slide" src="vid3.mp4" muted playsinline></video>
+  <video class="slide" src="vid4.mp4" muted playsinline></video>
+
+  <!-- Navigation Buttons -->
+  <button class="nav prev" onclick="prevSlide()">❮</button>
+  <button class="nav next" onclick="nextSlide()">❯</button>
+
+  <!-- Dots -->
+  <div class="dots">
+    <span onclick="goToSlide(0)"></span>
+    <span onclick="goToSlide(1)"></span>
+    <span onclick="goToSlide(2)"></span>
+    <span onclick="goToSlide(3)"></span>
+  </div>
+
+</div>
+
+<script>
+const slides = document.querySelectorAll(".slide");
+const dots = document.querySelectorAll(".dots span");
+
+let current = 0;
+
+function playSlide(index) {
+  slides.forEach((video, i) => {
+    video.pause();
+    video.classList.remove("active");
+    dots[i].classList.remove("active");
+
+    if (i === index) {
+      video.classList.add("active");
+      dots[i].classList.add("active");
+      video.currentTime = 0;
+      video.play();
+    }
+  });
+}
+
+function nextSlide() {
+  current = (current + 1) % slides.length;
+  playSlide(current);
+}
+
+function prevSlide() {
+  current = (current - 1 + slides.length) % slides.length;
+  playSlide(current);
+}
+
+function goToSlide(index) {
+  current = index;
+  playSlide(current);
+}
+
+/* Auto move when video ends */
+slides.forEach((video) => {
+  video.addEventListener("ended", nextSlide);
+});
+
+/* Start first slide */
+playSlide(current);
+</script>
+
+</body>
+</html>
